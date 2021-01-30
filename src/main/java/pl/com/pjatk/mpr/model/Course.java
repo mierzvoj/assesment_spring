@@ -8,12 +8,12 @@ import java.util.*;
 @Entity
 public class Course {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String courseName;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "course", orphanRemoval = true, targetEntity = Student.class)
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "course", orphanRemoval = true, targetEntity = Student.class)
 
-    private List<Student> students;
+    private List<Student> students = new ArrayList<>();
 
     public Course() {
     }

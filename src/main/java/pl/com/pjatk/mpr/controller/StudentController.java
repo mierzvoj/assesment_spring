@@ -3,6 +3,7 @@ package pl.com.pjatk.mpr.controller;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import pl.com.pjatk.mpr.model.*;
+import pl.com.pjatk.mpr.repository.*;
 import pl.com.pjatk.mpr.service.*;
 
 import java.util.*;
@@ -12,10 +13,12 @@ import java.util.*;
 public class StudentController {
     private StudentService studentService;
     private CourseService courseService;
+    private CourseRepository courseRepository;
 
-    public StudentController(StudentService studentService, CourseService courseService) {
+    public StudentController(StudentService studentService, CourseService courseService, CourseRepository courseRepository) {
         this.studentService = studentService;
         this.courseService = courseService;
+        this.courseRepository = courseRepository;
     }
 
     @GetMapping("/student")
@@ -60,5 +63,14 @@ public class StudentController {
         }
     }
 
+    @GetMapping("/student/course/{courseName}")
+    public ResponseEntity<Student> findCoursesWithStudentId(@PathVariable String courseName) {
+        Optional<Student> byCourseName = studentService.findStudentByCourse(courseName);
+        if (byCourseName.isPresent()) {
+            return ResponseEntity.ok(byCourseName.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
 }

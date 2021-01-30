@@ -10,11 +10,13 @@ import java.util.*;
 public class StudentService {
 
     StudentRepository studentRepository;
+    CourseRepository courseRepository;
     CourseService courseService;
 
-    public StudentService(StudentRepository studentRepository, CourseService courseService) {
+    public StudentService(StudentRepository studentRepository, CourseService courseService, CourseRepository courseRepository) {
         this.studentRepository = studentRepository;
         this.courseService = courseService;
+        this.courseRepository = courseRepository;
     }
 
     public List<Student> findAll(){
@@ -37,7 +39,7 @@ public class StudentService {
 
 
     public Optional<Student> findStudentByCourse(String courseName){
-        return studentRepository.getStudentByCourseName(courseName);
+        return courseRepository.getStudentsByCourseName(courseName);
     }
 
 

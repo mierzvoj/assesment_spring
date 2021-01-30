@@ -67,9 +67,9 @@ public class Student {
     }
 
 
-    public Course getCourse() {
-        return course;
-    }
+//    public Course getCourse() {
+//        return course;
+//    }
 
     public void setCourse(Course course) {
         this.course = course;
