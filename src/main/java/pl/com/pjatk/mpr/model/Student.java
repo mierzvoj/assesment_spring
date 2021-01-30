@@ -15,7 +15,7 @@ public class Student {
 
     @ManyToOne
     @JoinColumn(name = "course_id")
-    @JsonIgnore
+    //@JsonIgnore
     private Course course;
 
     @OneToOne
@@ -26,10 +26,11 @@ public class Student {
     public Student() {
     }
 
-    public Student(String studentId, String firstName, String secondName, Grade grade) {
+    public Student(String studentId, String firstName, String secondName, Course course, Grade grade) {
         this.studentId = studentId;
         this.firstName = firstName;
         this.secondName = secondName;
+        this.course = course;
         this.grade = grade;
     }
 
@@ -66,8 +67,11 @@ public class Student {
     }
 
 
+    public Course getCourse() {
+        return course;
+    }
 
-
-
-
+    public void setCourse(Course course) {
+        this.course = course;
+    }
 }
