@@ -13,10 +13,12 @@ public class Student {
     private String firstName;
     private String secondName;
 
-    @ManyToOne
-    @JoinColumn(name = "course_id")
-    //@JsonIgnore
-    private Course course;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "course_id", referencedColumnName = "id")
+    @JsonIgnore
+
+    public Course course;
 
     @OneToOne
     @JoinColumn(name = "grades_id", referencedColumnName = "id")
@@ -67,9 +69,9 @@ public class Student {
     }
 
 
-//    public Course getCourse() {
-//        return course;
-//    }
+    public Course getCourse() {
+        return course;
+    }
 
     public void setCourse(Course course) {
         this.course = course;

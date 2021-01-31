@@ -4,6 +4,7 @@ import org.springframework.stereotype.*;
 import pl.com.pjatk.mpr.model.*;
 import pl.com.pjatk.mpr.repository.*;
 
+import javax.persistence.*;
 import java.util.*;
 import java.util.regex.*;
 
@@ -22,6 +23,7 @@ public class CourseService {
 
 
     public Course saveCourse(Course course){
+        course.getStudents().forEach(d -> d.setCourse(course));
         courseRepository.save(course);
         return course;
     }
