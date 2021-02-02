@@ -10,12 +10,9 @@ public class Grade {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private double grade;
 
-
-
-    @OneToOne(mappedBy = "grade")
+    @ManyToOne(cascade = CascadeType.ALL)
     @JsonIgnore
     private Student student;
 
@@ -40,7 +37,7 @@ public class Grade {
         return grade;
     }
 
-    public void setGrade(double grade) {
+    public void setGrade(Student student) {
         this.grade = grade;
     }
 

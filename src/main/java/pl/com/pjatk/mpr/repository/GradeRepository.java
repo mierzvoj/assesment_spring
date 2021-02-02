@@ -8,7 +8,7 @@ import java.util.*;
 @Repository
 public interface GradeRepository extends JpaRepository<Grade, Long> {
 
-//    @Query("SELECT g from  Grade g where g.id = :studentId")
-//    Grade getStudentGrade(String studentId);
+    @Query("SELECT g from  Grade g where g.id = :studentId")
+    Grade getStudentGrade(Long studentId);
 
 }

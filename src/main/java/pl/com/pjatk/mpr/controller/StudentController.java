@@ -72,13 +72,16 @@ public class StudentController {
         }
     }
 
-    @PostMapping("/grade")
-    public ResponseEntity<Grade> saveGrade(@RequestBody Grade grade) {
-        return ResponseEntity.ok(gradeService.saveGrade(grade));
+    @PostMapping("/setgrade/{studentId}")
+    public ResponseEntity<Student> saveGrades(@RequestBody Student student) {
+        return ResponseEntity.ok(studentService.saveStudent(student));
     }
 
-//    @GetMapping("/getgrade/{studentId}")
-//    public ResponseEntity<Grade> getGrade(@PathVariable String studentId) {
-//        return ResponseEntity.ok(gradeService.getGrades(studentId));
-//    }
+
+
+
+    @GetMapping("/getgrade/{studentId}")
+    public ResponseEntity<Grade> getGrade(@PathVariable Long studentId) {
+        return ResponseEntity.ok(gradeService.getGrades(studentId));
+    }
 }

@@ -21,8 +21,8 @@ public class GradeService {
         return grade;
     }
 
-//    public Grade getGrades(String studentId){
-//        return gradeRepository.getStudentGrade(studentId);
-//    }
+    public Grade getGrades(Long studentId){
+        return gradeRepository.getStudentGrade(studentId);
+    }
 
 }
