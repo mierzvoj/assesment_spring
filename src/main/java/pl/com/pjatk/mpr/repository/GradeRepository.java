@@ -7,9 +7,8 @@ import pl.com.pjatk.mpr.model.*;
 import java.util.*;
 @Repository
 public interface GradeRepository extends JpaRepository<Grade, Long> {
-    @Query("SELECT s from  Student s where s.id = :gradeA")
-    Student getStudentGradeA(Double gradeA);
 
-    @Query("SELECT s from  Student s where s.id = :gradeB")
-    Student getStudentGradeB(Double gradeB);
+//    @Query("SELECT g from  Grade g where g.id = :studentId")
+//    Grade getStudentGrade(String studentId);
+
 }

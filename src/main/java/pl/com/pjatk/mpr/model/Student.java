@@ -20,7 +20,7 @@ public class Student {
 
     public Course course;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "grades_id", referencedColumnName = "id")
     private Grade grade;
 
@@ -76,4 +76,14 @@ public class Student {
     public void setCourse(Course course) {
         this.course = course;
     }
+
+    public Grade getGrade() {
+        return grade;
+    }
+
+    public void setGrade(Grade grade) {
+        this.grade = grade;
+    }
+
+
 }

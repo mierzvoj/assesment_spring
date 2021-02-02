@@ -13,12 +13,12 @@ import java.util.*;
 public class StudentController {
     private StudentService studentService;
     private CourseService courseService;
-    private CourseRepository courseRepository;
+    private GradeService gradeService;
 
-    public StudentController(StudentService studentService, CourseService courseService, CourseRepository courseRepository) {
+    public StudentController(StudentService studentService, CourseService courseService, GradeService gradeService) {
         this.studentService = studentService;
         this.courseService = courseService;
-        this.courseRepository = courseRepository;
+        this.gradeService = gradeService;
     }
 
     @GetMapping("/student")
@@ -41,7 +41,6 @@ public class StudentController {
             return ResponseEntity.notFound().build();
         }
     }
-
 
     @GetMapping("/course")
     public ResponseEntity<List<Course>> findAllCourses() {
@@ -73,4 +72,13 @@ public class StudentController {
         }
     }
 
+    @PostMapping("/grade")
+    public ResponseEntity<Grade> saveGrade(@RequestBody Grade grade) {
+        return ResponseEntity.ok(gradeService.saveGrade(grade));
+    }
+
+//    @GetMapping("/getgrade/{studentId}")
+//    public ResponseEntity<Grade> getGrade(@PathVariable String studentId) {
+//        return ResponseEntity.ok(gradeService.getGrades(studentId));
+//    }
 }

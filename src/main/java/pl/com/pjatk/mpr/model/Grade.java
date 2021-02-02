@@ -11,8 +11,8 @@ public class Grade {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private double gradeA;
-    private double gradeB;
+    private double grade;
+
 
 
     @OneToOne(mappedBy = "grade")
@@ -22,9 +22,9 @@ public class Grade {
     public Grade() {
     }
 
-    public Grade(double gradeA, double gradeB) {
-        this.gradeA = gradeA;
-        this.gradeB = gradeB;
+    public Grade(double grade) {
+        this.grade = grade;
+
 
     }
 
@@ -36,20 +36,22 @@ public class Grade {
         this.id = id;
     }
 
-    public double getGradeA() {
-        return gradeA;
+    public double getGrade() {
+        return grade;
     }
 
-    public void setGradeA(double gradeA) {
-        this.gradeA = gradeA;
+    public void setGrade(double grade) {
+        this.grade = grade;
     }
 
-    public double getGradeB() {
-        return gradeB;
+
+
+    public Student getStudent() {
+        return student;
     }
 
-    public void setGradeB(double gradeB) {
-        this.gradeB = gradeB;
+    public void setStudent(Student student) {
+        this.student = student;
     }
 }
 
