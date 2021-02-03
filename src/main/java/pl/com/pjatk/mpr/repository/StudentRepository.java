@@ -12,7 +12,6 @@ import java.util.*;
 public interface StudentRepository extends JpaRepository<Student, Long> {
     Optional<Student> findByStudentId(String studentId);
 
-    @Query("SELECT s from  Student s where s.id = :courseName")
-    Optional<Student> getStudentByCourseName(String courseName);
 
+    Optional<Student> OrderByAverageGrade();
 }

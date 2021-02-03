@@ -14,26 +14,29 @@ public class Student {
     private String firstName;
     private String secondName;
 
+    double grade1;
+    double grade2;
+    double grade3;
+    double grade4;
+    double grade5;
+
+    double averageGrade;
+
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "course_id", referencedColumnName = "id")
     @JsonIgnore
     public Course course;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "grades_id", referencedColumnName = "id")
-    private List<Grade> grades = new ArrayList<>();
-
-
     public Student() {
     }
 
-    public Student(String studentId, String firstName, String secondName, Course course, List<Grade> grades) {
+    public Student(String studentId, String firstName, String secondName, Course course) {
         this.studentId = studentId;
         this.firstName = firstName;
         this.secondName = secondName;
         this.course = course;
-        this.grades = grades;
+
     }
 
     public Long getId() {
@@ -77,11 +80,56 @@ public class Student {
         this.course = course;
     }
 
-    public List<Grade> getGrades() {
-        return grades;
+    public double getGrade1() {
+        return grade1;
     }
 
-    public void setGrades(List<Grade> grades) {
-        this.grades = grades;
+    public void setGrade1(double grade1) {
+        this.grade1 = grade1;
+    }
+
+    public double getGrade2() {
+        return grade2;
+    }
+
+    public void setGrade2(double grade2) {
+        this.grade2 = grade2;
+    }
+
+    public double getGrade3() {
+        return grade3;
+    }
+
+    public void setGrade3(double grade3) {
+        this.grade3 = grade3;
+    }
+
+    public double getGrade4() {
+        return grade4;
+    }
+
+    public void setGrade4(double grade4) {
+        this.grade4 = grade4;
+    }
+
+    public double getGrade5() {
+        return grade5;
+    }
+
+    public void setGrade5(double grade5) {
+        this.grade5 = grade5;
+    }
+
+    public double getAverageGrade() {
+        return averageGrade;
+    }
+
+    public void setAverageGrade(double averageGrade) {
+        this.averageGrade = averageGrade;
+    }
+    @JsonIgnore
+    public double getSumOfGrades(){
+        double sumOfGrades = grade1 + grade2 + grade3 + grade4 + grade5;
+        return  sumOfGrades;
     }
 }

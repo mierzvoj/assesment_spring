@@ -42,6 +42,16 @@ public class StudentController {
         }
     }
 
+    @GetMapping("/student/calc/{id}")
+    public ResponseEntity<Student> calculateAverage(@PathVariable Long id) {
+      return ResponseEntity.ok(studentService.averageCount(id));
+    }
+
+    @GetMapping("/student/list")
+    public ResponseEntity<List> findBestStudents() {
+        return ResponseEntity.ok(studentService.listBest());
+    }
+
     @GetMapping("/course")
     public ResponseEntity<List<Course>> findAllCourses() {
         return ResponseEntity.ok(courseService.findAll());
@@ -72,16 +82,9 @@ public class StudentController {
         }
     }
 
-    @PostMapping("/setgrade/{studentId}")
-    public ResponseEntity<Student> saveGrades(@RequestBody Student student) {
-        return ResponseEntity.ok(studentService.saveStudent(student));
-    }
 
 
 
 
-    @GetMapping("/getgrade/{studentId}")
-    public ResponseEntity<Grade> getGrade(@PathVariable Long studentId) {
-        return ResponseEntity.ok(gradeService.getGrades(studentId));
-    }
+
 }
