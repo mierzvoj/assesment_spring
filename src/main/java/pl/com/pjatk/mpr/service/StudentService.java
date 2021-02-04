@@ -36,6 +36,7 @@ public class StudentService {
 
     public Optional<Student> findByStudentId(String studentId){
         return studentRepository.findByStudentId(studentId);
+
     }
 
     public Student saveStudent(Student student){

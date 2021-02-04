@@ -2,11 +2,15 @@ package pl.com.pjatk.mpr.controller;
 
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.*;
+import pl.com.pjatk.mpr.exception.*;
 import pl.com.pjatk.mpr.model.*;
 import pl.com.pjatk.mpr.repository.*;
 import pl.com.pjatk.mpr.service.*;
 
 import java.util.*;
+
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @RestController
 //@RequestMapping("/student")
@@ -52,9 +56,11 @@ public class StudentController {
         return ResponseEntity.ok(studentService.listBest());
     }
 
+
     @GetMapping("/course")
     public ResponseEntity<List<Course>> findAllCourses() {
         return ResponseEntity.ok(courseService.findAll());
+
     }
 
     @PostMapping("/course")
@@ -68,7 +74,7 @@ public class StudentController {
         if (byCourseId.isPresent()) {
             return ResponseEntity.ok(byCourseId.get());
         } else {
-            return ResponseEntity.notFound().build();
+            throw new ResponseStatusException(NOT_FOUND, "Unable to find the course");
         }
     }
 
