@@ -18,11 +18,14 @@ public class StudentController {
     private StudentService studentService;
     private CourseService courseService;
     private GradeService gradeService;
+    private MessageService messageService;
 
-    public StudentController(StudentService studentService, CourseService courseService, GradeService gradeService) {
+    public StudentController(StudentService studentService, CourseService courseService
+            , GradeService gradeService, MessageService messageService) {
         this.studentService = studentService;
         this.courseService = courseService;
         this.gradeService = gradeService;
+        this.messageService = messageService;
     }
 
     @GetMapping("/student")
@@ -33,17 +36,17 @@ public class StudentController {
 
     @PostMapping("/student")
     public ResponseEntity<Student> saveStudent(@RequestBody Student student) {
-        return ResponseEntity.ok(studentService.saveStudent(student));
+          return ResponseEntity.ok(studentService.saveStudent(student));
     }
 
     @GetMapping("/student/{studentId}")
     public ResponseEntity<Student> findByStudentId(@PathVariable String studentId) {
-        Optional<Student> byStudentId = studentService.findByStudentId(studentId);
-        if (byStudentId.isPresent()) {
-            return ResponseEntity.ok(byStudentId.get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return ResponseEntity.ok(studentService.findByStudentId(studentId));
+//        if (byStudentId.isPresent()) {
+//            return ResponseEntity.ok(byStudentId.get());
+//        } else {
+//            return ResponseEntity.notFound().build();
+//        }
     }
 
     @GetMapping("/student/calc/{id}")
@@ -65,6 +68,7 @@ public class StudentController {
 
     @PostMapping("/course")
     public ResponseEntity<Course> saveCourse(@RequestBody Course course) {
+
         return ResponseEntity.ok(courseService.saveCourse(course));
     }
 
@@ -87,8 +91,10 @@ public class StudentController {
             return ResponseEntity.notFound().build();
         }
     }
-
-
+     @PostMapping("/txt/{studentId}/{message}")
+     public ResponseEntity<Student> textToStudent(@PathVariable Long studentId, @PathVariable String message){
+         return ResponseEntity.ok(studentService.textToStudent(studentId, message));
+        }
 
 
 

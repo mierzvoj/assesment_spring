@@ -14,14 +14,16 @@ public class StudentService {
     CourseRepository courseRepository;
     CourseService courseService;
     GradeService gradeService;
+    MessageService messageService;
 
 
     public StudentService(StudentRepository studentRepository, CourseService courseService,
-                          CourseRepository courseRepository, GradeService gradeService) {
+                          CourseRepository courseRepository, GradeService gradeService, MessageService messageService) {
         this.studentRepository = studentRepository;
         this.courseService = courseService;
         this.courseRepository = courseRepository;
         this.gradeService = gradeService;
+        this.messageService = messageService;
 
     }
 
@@ -31,11 +33,12 @@ public class StudentService {
 
     public Student findById(Long id){
         return studentRepository.findById(id)
-            .orElseThrow(() -> new EntityNotFoundException("This Student " + id +" does not exists"));
+            .orElseThrow(RuntimeException::new);
     }
 
-    public Optional<Student> findByStudentId(String studentId){
-        return studentRepository.findByStudentId(studentId);
+    public Student findByStudentId(String studentId){
+        return studentRepository.findByStudentId(studentId)
+                .orElseThrow(RuntimeException::new);
 
     }
 
@@ -55,8 +58,14 @@ public class StudentService {
         return studentRepository.save(averageStudent);
 
     }
+    public Student textToStudent(Long id, String message){
+        Student receiver = studentRepository.findById(id).get();
+        studentRepository.save(messageService.textToStudent(receiver, message));
+        return studentRepository.save(receiver);
+    }
 
-    public List<Double> listBest(){
+
+    public List<Student> listBest(){
         return gradeService.listBestStudents();
     }
 

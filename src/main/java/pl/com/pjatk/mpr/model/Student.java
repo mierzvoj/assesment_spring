@@ -1,6 +1,7 @@
 package pl.com.pjatk.mpr.model;
 
 import com.fasterxml.jackson.annotation.*;
+import org.aspectj.bridge.*;
 
 import javax.persistence.*;
 import java.util.*;
@@ -14,13 +15,15 @@ public class Student {
     private String firstName;
     private String secondName;
 
-    double grade1;
-    double grade2;
-    double grade3;
-    double grade4;
-    double grade5;
+    private double grade1;
+    private double grade2;
+    private double grade3;
+    private double grade4;
+    private double grade5;
 
-    double averageGrade;
+    private double averageGrade;
+    private String message;
+
 
 
     @ManyToOne(cascade = CascadeType.ALL)
@@ -28,15 +31,17 @@ public class Student {
     @JsonIgnore
     public Course course;
 
+
+
     public Student() {
     }
 
-    public Student(String studentId, String firstName, String secondName, Course course) {
+    public Student(String studentId, String firstName, String secondName, Course course, String message) {
         this.studentId = studentId;
         this.firstName = firstName;
         this.secondName = secondName;
         this.course = course;
-
+        this.message = message;
     }
 
     public Long getId() {
@@ -80,6 +85,7 @@ public class Student {
         this.course = course;
     }
 
+
     public double getGrade1() {
         return grade1;
     }
@@ -120,6 +126,14 @@ public class Student {
         this.grade5 = grade5;
     }
 
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
     public double getAverageGrade() {
         return averageGrade;
     }
@@ -132,4 +146,6 @@ public class Student {
         double sumOfGrades = grade1 + grade2 + grade3 + grade4 + grade5;
         return  sumOfGrades;
     }
+
+
 }

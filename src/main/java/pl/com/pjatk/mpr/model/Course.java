@@ -11,9 +11,12 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String courseName;
+
+
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "course", orphanRemoval = true, targetEntity = Student.class)
 
     private List<Student> students = new ArrayList<>();
+
 
     public Course() {
     }
@@ -48,4 +51,6 @@ public class Course {
     public void setStudents(List<Student> students) {
         this.students = students;
     }
+
+
 }

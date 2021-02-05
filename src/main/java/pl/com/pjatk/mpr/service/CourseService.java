@@ -1,6 +1,7 @@
 package pl.com.pjatk.mpr.service;
 
 import org.springframework.stereotype.*;
+import pl.com.pjatk.mpr.exception.*;
 import pl.com.pjatk.mpr.model.*;
 import pl.com.pjatk.mpr.repository.*;
 
@@ -12,9 +13,11 @@ import java.util.regex.*;
 public class CourseService {
 
     CourseRepository courseRepository;
+    StudentRepository studentRepository;
 
-    public CourseService(CourseRepository courseRepository) {
+    public CourseService(CourseRepository courseRepository, StudentRepository studentRepository) {
         this.courseRepository = courseRepository;
+        this.studentRepository = studentRepository;
     }
 
     public List<Course> findAll(){
@@ -23,9 +26,12 @@ public class CourseService {
 
 
     public Course saveCourse(Course course){
-        course.getStudents().forEach(d -> d.setCourse(course));
-        courseRepository.save(course);
-        return course;
+
+
+            course.getStudents().forEach(d -> d.setCourse(course));
+            courseRepository.save(course);
+            return course;
+
     }
 
     public Optional<Course> findByCourseName(String courseName){

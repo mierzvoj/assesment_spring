@@ -12,6 +12,7 @@ import java.util.*;
 public interface StudentRepository extends JpaRepository<Student, Long> {
     Optional<Student> findByStudentId(String studentId);
 
+    List<Student> OrderByAverageGradeDesc();
 
-    Optional<Student> OrderByAverageGrade();
+
 }

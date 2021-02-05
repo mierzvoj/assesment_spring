@@ -14,13 +14,10 @@ public class GradeService {
 
     StudentRepository studentRepository;
 
-    private List<Double> bestAvg = new ArrayList<Double>();
-
+    List<Student> students = new ArrayList<>();
 
     public GradeService(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
-
-
     }
 
     public static Student average(Student studentAvg) {
@@ -29,12 +26,9 @@ public class GradeService {
         return studentAvg;
     }
 
-    public List<Double> listBestStudents() {
-        bestAvg= studentRepository.findAll().stream()
-                .map(Student::getAverageGrade)
-               .sorted(Comparator.reverseOrder())
-                .collect(Collectors.toList());
-        return bestAvg;
+    public List<Student> listBestStudents() {
+        students = studentRepository.OrderByAverageGradeDesc();
+        return students;
 
     }
 
