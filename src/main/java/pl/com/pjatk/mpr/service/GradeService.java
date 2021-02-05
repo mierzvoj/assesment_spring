@@ -20,7 +20,7 @@ public class GradeService {
         this.studentRepository = studentRepository;
     }
 
-    public static Student average(Student studentAvg) {
+    public  Student average(Student studentAvg) {
         double averageGrade = studentAvg.getSumOfGrades() / 5;
         studentAvg.setAverageGrade(averageGrade);
         return studentAvg;

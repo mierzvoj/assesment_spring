@@ -9,4 +9,5 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Object> handleRuntimeException(RuntimeException exception){
         return new ResponseEntity<>("Entity does not exist", HttpStatus.BAD_REQUEST);
     }
+
 }

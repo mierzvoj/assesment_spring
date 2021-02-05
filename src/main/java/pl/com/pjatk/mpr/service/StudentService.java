@@ -47,6 +47,15 @@ public class StudentService {
         return student;
     }
 
+    public Student updateStudent(Student student){
+        studentRepository.save(student);
+        return student;
+    }
+
+    public void deleteStudent(Long id){
+        studentRepository.deleteById(id);
+
+    }
 
     public Optional<Student> findStudentByCourse(String courseName){
         return courseRepository.getStudentsByCourseName(courseName);
@@ -70,4 +79,7 @@ public class StudentService {
     }
 
 
+    public void deleteAll() {
+        studentRepository.deleteAll();
+    }
 }

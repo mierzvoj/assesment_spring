@@ -43,6 +43,21 @@ public class Student {
         this.course = course;
         this.message = message;
     }
+    public Student(Long id, String firstName, String secondName, Course course, String message) {
+        this.id = id;
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.course = course;
+        this.message = message;
+    }
+    public Student(String firstName, String secondName, Course course) {
+        this.firstName = firstName;
+        this.secondName = secondName;
+    }
+    public Student(String secondName) {
+        this.secondName = secondName;
+    }
+
 
     public Long getId() {
         return id;

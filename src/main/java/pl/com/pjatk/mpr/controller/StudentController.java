@@ -36,22 +36,36 @@ public class StudentController {
 
     @PostMapping("/student")
     public ResponseEntity<Student> saveStudent(@RequestBody Student student) {
-          return ResponseEntity.ok(studentService.saveStudent(student));
+        return ResponseEntity.ok(studentService.saveStudent(student));
     }
 
-    @GetMapping("/student/{studentId}")
-    public ResponseEntity<Student> findByStudentId(@PathVariable String studentId) {
-        return ResponseEntity.ok(studentService.findByStudentId(studentId));
-//        if (byStudentId.isPresent()) {
-//            return ResponseEntity.ok(byStudentId.get());
-//        } else {
-//            return ResponseEntity.notFound().build();
-//        }
+//    @GetMapping("/student/{studentId}")
+//    public ResponseEntity<Student> findByStudentIdString(@PathVariable String studentId) {
+//        return ResponseEntity.ok(studentService.findByStudentId(studentId));
+//
+//    }
+
+    @GetMapping("/student/{id}")
+    public ResponseEntity<Student> findByStudentIdLong(@PathVariable Long id) {
+        return ResponseEntity.ok(studentService.findById(id));
+
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Student> updateStudent(@RequestBody Student student) {
+        return ResponseEntity.ok(studentService.updateStudent(student));
+    }
+
+    @DeleteMapping("/{id}")
+
+    public ResponseEntity<Void> deleteStudent(@PathVariable Long id) {
+        studentService.deleteStudent(id);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/student/calc/{id}")
     public ResponseEntity<Student> calculateAverage(@PathVariable Long id) {
-      return ResponseEntity.ok(studentService.averageCount(id));
+        return ResponseEntity.ok(studentService.averageCount(id));
     }
 
     @GetMapping("/student/list")
@@ -59,6 +73,11 @@ public class StudentController {
         return ResponseEntity.ok(studentService.listBest());
     }
 
+    @PostMapping("/course")
+    public ResponseEntity<Course> saveCourse(@RequestBody Course course) {
+
+        return ResponseEntity.ok(courseService.saveCourse(course));
+    }
 
     @GetMapping("/course")
     public ResponseEntity<List<Course>> findAllCourses() {
@@ -66,10 +85,9 @@ public class StudentController {
 
     }
 
-    @PostMapping("/course")
-    public ResponseEntity<Course> saveCourse(@RequestBody Course course) {
-
-        return ResponseEntity.ok(courseService.saveCourse(course));
+    @PostMapping("/txt/{studentId}/{message}")
+    public ResponseEntity<Student> textToStudent(@PathVariable Long studentId, @PathVariable String message) {
+        return ResponseEntity.ok(studentService.textToStudent(studentId, message));
     }
 
     @GetMapping("/course/{courseName}")
@@ -91,12 +109,11 @@ public class StudentController {
             return ResponseEntity.notFound().build();
         }
     }
-     @PostMapping("/txt/{studentId}/{message}")
-     public ResponseEntity<Student> textToStudent(@PathVariable Long studentId, @PathVariable String message){
-         return ResponseEntity.ok(studentService.textToStudent(studentId, message));
-        }
 
-
+    @GetMapping("/ctrl")
+    public ResponseEntity<String> thisIsYourController() {
+        return ResponseEntity.ok("This is your controller");
+    }
 
 
 }
